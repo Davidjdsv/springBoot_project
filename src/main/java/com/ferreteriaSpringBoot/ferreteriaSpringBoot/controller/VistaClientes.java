@@ -1,5 +1,6 @@
 package com.ferreteriaSpringBoot.ferreteriaSpringBoot.controller;
 
+import com.ferreteriaSpringBoot.ferreteriaSpringBoot.model.Clientes;
 import com.ferreteriaSpringBoot.ferreteriaSpringBoot.repository.ClientesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,10 @@ public class VistaClientes {
         return "clientes";
     }
 
-
+    @GetMapping("vistaC/form")
+    public String form(Model model){
+        model.addAttribute("clientes", new Clientes());
+        return "clientes_form";
+    }
 
 }
