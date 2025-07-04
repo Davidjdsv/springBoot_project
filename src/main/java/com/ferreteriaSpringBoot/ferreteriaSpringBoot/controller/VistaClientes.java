@@ -83,7 +83,7 @@ public class VistaClientes {
      * @param ra Atributos para enviar mensajes flash después de redireccionar
      * @return Redirección a la vista principal de clientes
      */
-    @PostMapping("/vistaC/delete")
+    @PostMapping("vistaC/delete/{id}")
     public String delete(@PathVariable Long id, RedirectAttributes ra){
         clientesRepository.deleteById(id);
         ra.addFlashAttribute("mensaje", "Cliente eliminado con éxito");
