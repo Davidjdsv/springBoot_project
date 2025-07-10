@@ -11,6 +11,35 @@
 
 </head>
 <body>
+<!--Navbar-->
+
+<nav class="navbar navbar-expand-lg bg-dark">
+<!--    <div class="container-fluid">-->
+<!--        <img src="../static/img/ferreteria_icono_2.png" class="img-fluid ferreteria-logo" alt="ferreteria_icono.png">-->
+<!--    </div>-->
+    <div class="container-fluid">
+        <a class="navbar-brand text-white" href="#">Ferretería Don Tornillo</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarScroll">
+            <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+                <li class="nav-item">
+                    <a class="nav-link active text-white" aria-current="page" href="#">Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" th:href="@{vistaInventario}">Inventario</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Link
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
 <!-- Contenido principal -->
 <div style="padding: 20px;">
 
@@ -18,22 +47,29 @@
 
     <div th:if="${success}" class="alert alert-success" th:text="${success}"></div>
 
-    <a th:href="@{/vistaC/form}" class="btn btn-primary mb-3">📝 Registrar Clientes</a>
+    <button type="button" class="btn btn-primary mb-3 te"><a th:href="@{/vistaC/form}" class="text-reset">Registrar Clientes</a></button>
+    <button type="button" class="btn btn-danger mb-3 te"><a th:href="@{/vistaC/pdf}" class="text-reset">Exportar PDF</a></button>
+    <button type="button" class="btn btn-success mb-3 te"><a th:href="@{/vistaC/excel}" class="text-reset">Exportar PDF</a></button>
 
     <div class="table-responsive">
-        <table class="table table-bordered table-striped">
-            <thead class="table-success">
+        <table class="table table-bordered table-striped table-hover">
+            <thead class="table-dark">
             <tr class="centrado">
-                <th>⚙️</th>
                 <th>ID Cliente</th>
                 <th>Nombre</th>
                 <th>Teléfono</th>
                 <th>Dirección</th>
                 <th>Correo</th>
+                <th>Acciones</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="clientes : ${clientes}">
+                <td th:text="${clientes.id_cliente}"></td>
+                <td th:text="${clientes.nombre}"></td>
+                <td th:text="${clientes.telefono}"></td>
+                <td th:text="${clientes.direccion}"></td>
+                <td th:text="${clientes.correo}"></td>
                 <td>
                     <a th:href="@{'/vistaC/edit/' + ${clientes.id_cliente}}" class="btn btn-outline-light btn-sm">✏️</a>
                     <form th:action="@{'/vistaC/delete/' + ${clientes.id_cliente}}" method="post" style="display:inline;">
@@ -43,11 +79,7 @@
                         </button>
                     </form>
                 </td>
-                <td th:text="${clientes.id_cliente}"></td>
-                <td th:text="${clientes.nombre}"></td>
-                <td th:text="${clientes.telefono}"></td>
-                <td th:text="${clientes.direccion}"></td>
-                <td th:text="${clientes.correo}"></td>
+
             </tr>
             </tbody>
         </table>
